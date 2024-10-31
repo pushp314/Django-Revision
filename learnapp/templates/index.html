@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>This is Home Page</h1>
+
+    <table border="">
+        <tr>
+            <th>S.No.</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Vote</th>
+
+        </tr>
+        <!-- Looping the List in HTML file -->
+        {% for people in people %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+        <!-- If you want to print/render django variable in html you need to use double curly bracket -->
+                <td>{{people.name}}</td>
+                <td>{{people.age}}</td>
+                <td {% if people.age < 18 %} style="background-color: red;" {% endif %}>
+                <!-- If else condition in Django template -->
+                {% if people.age >= 18 %}
+                    Yes
+                {% else %}
+                    No
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+
+        <!-- Django Template Tags -> Search on Google To Know More -->
+
+
+        <!-- To Show Limited Data we use Truncatechars -->
+        <p>
+            {{ text|truncatechars:34 }}
+        </p>
+
+
+        <!-- To check if given data is present on the list -->
+        <p>
+            {% if 'potato' in vegetables %}
+                Yes, Potato is present in the list
+            {% else %}
+                No, Potato is not present in the list
+            {% endif %}
+        </p>
+        
+{% endblock %}
